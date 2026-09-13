@@ -1,0 +1,47 @@
+# ---------------------------------------------------------------
+# PATIENT DATA MUST NEVER BE COMMITTED.
+# These patterns exist to prevent accidental disclosure.
+# ---------------------------------------------------------------
+# data/ iceriginin TAMAMI dislanir, yalnizca aciklama dosyasi kalir.
+# ("data/" yazilsaydi data/README.md de commit edilemezdi.)
+data/*
+!data/README.md
+*.sav
+*.xlsx
+*.xls
+*.csv
+*.dta
+*.parquet
+*.pkl
+*.pickle
+
+# Allow the text files that must stay in the repository
+!requirements.txt
+!outputs/README.md
+
+# Summary tables ARE allowed back: they hold group medians, AUCs and counts,
+# never a per-patient row. Named by prefix so that a stray patient-level CSV
+# dropped into outputs/ stays excluded by the *.csv rule above.
+!outputs/table*.csv
+
+# Out-of-fold probabilities: ONE ROW PER PATIENT, carrying that patient's grade.
+# Derived rather than raw, but still patient-level, so it is never committed.
+# Regenerate it by running the notebook.
+outputs/*.npz
+
+# Notebook state
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Environments
+.venv/
+venv/
+env/
+.conda/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
